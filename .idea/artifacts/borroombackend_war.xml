@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="borroombackend:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="borroom.war">
+      <element id="artifact" artifact-name="borroombackend:war exploded" />
+    </root>
+  </artifact>
+</component>
