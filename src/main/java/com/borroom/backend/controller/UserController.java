@@ -82,10 +82,10 @@ public class UserController {
     }
 
     /**
-     * 通过isadmin查询一个用户列表
+     * 判断用户是否是管理员
      * */
-    @GetMapping(value = "/users/isadmin/{isadmin}")
-    public Result userListByIsadmin(@PathVariable("isadmin") Boolean isadmin) {
-        return ResultUtil.success(userRepository.findByIsadmin(isadmin));
+    @GetMapping(value = "/users/isadmin/{userid}")
+    public Result userByIsadmin(@PathVariable("userid") String userid) {
+        return ResultUtil.success(userRepository.findOne(userid).getIsadmin());
     }
 }
