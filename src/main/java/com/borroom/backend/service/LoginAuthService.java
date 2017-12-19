@@ -31,9 +31,13 @@ public class LoginAuthService {
         } else {
             if(password.equals(user.getPassword())) {
                 //登录成功
-                httpSession.setAttribute("user", user);
-                System.out.println("+++++++" + httpSession.getAttribute("user"));
-                return ResultUtil.success();
+                if(user.getIsadmin() == true) {
+                    httpSession.setAttribute("admin", user);
+                    return ResultUtil.success("admin");
+                } else {
+                    httpSession.setAttribute("user", user);
+                    return ResultUtil.success("user");
+                }
             } else {
                 //提示密码错误，请重新输入
                 return ResultUtil.error(2, "password error");
