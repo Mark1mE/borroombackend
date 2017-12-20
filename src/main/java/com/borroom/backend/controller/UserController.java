@@ -27,6 +27,11 @@ public class UserController {
         return ResultUtil.success(userRepository.findAll());
     }
 
+    @GetMapping(value = "/admin/users/{userid}")
+    public Result userListExceptAdmin(@PathVariable("userid") String userid) {
+        return ResultUtil.success(userRepository.findAllByUseridNotContains(userid));
+    }
+
     /**
      * 添加一个用户
      * */

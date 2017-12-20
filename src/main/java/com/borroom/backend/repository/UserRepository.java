@@ -11,4 +11,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     //通过是否是管理员来查询
     List<User> findByIsadmin(Boolean isadmin);
+
+    List<User> findAllByUseridNotContains(String userid);
 }
