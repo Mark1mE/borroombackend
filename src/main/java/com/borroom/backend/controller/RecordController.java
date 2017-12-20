@@ -119,4 +119,25 @@ public class RecordController {
         return ResultUtil.success(recordRepository.save(record));
     }
 
+    @PutMapping(value = "/records/pass")
+    public Result passRecord(Long id) {
+        Record record = recordRepository.findOne(id);
+        record.setStatus(1);
+        return ResultUtil.success(recordRepository.save(record));
+    }
+
+    @PutMapping(value = "/records/reject")
+    public Result RejectRecord(Long id) {
+        Record record = recordRepository.findOne(id);
+        record.setStatus(3);
+        return ResultUtil.success(recordRepository.save(record));
+    }
+
+    Date DateFormatTansfer(String time) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(time, pos);
+        return strtodate;
+    }
+
 }

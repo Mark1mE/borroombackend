@@ -57,7 +57,18 @@ public class UserController {
     public Result userUpdate(User user) {
         if(!userRepository.exists(user.getUserid())) {
             return ResultUtil.error(7, "no user");
+        } else {
+            if(userOrAdmin(user.getUserid())) {
+                user.setIsadmin(true);
+            } else {
+                user.setIsadmin(false);
+            }
+            return ResultUtil.success(userRepository.save(user));
         }
+    }
+
+    @PutMapping(value = "/admin/users")
+    public Result adminUpdateUser(User user) {
         return ResultUtil.success(userRepository.save(user));
     }
 
@@ -84,8 +95,7 @@ public class UserController {
     /**
      * 判断用户是否是管理员
      * */
-    @GetMapping(value = "/users/isadmin/{userid}")
-    public Result userByIsadmin(@PathVariable("userid") String userid) {
-        return ResultUtil.success(userRepository.findOne(userid).getIsadmin());
+    public Boolean userOrAdmin(String userid) {
+        return userRepository.findOne(userid).getIsadmin();
     }
 }
